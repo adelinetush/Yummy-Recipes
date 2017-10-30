@@ -1,0 +1,30 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    background:#f8f8f8 url("../images/bg.png") no-repeat;
+}
+
+
+/** NAVBAR **/
+
+
+
+
+
+/** LANDING **/
+
+
+
+
+
+/**Footer **/
+footer {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding-bottom: 0.5%;
+}
+
+
