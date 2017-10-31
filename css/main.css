@@ -25,10 +25,18 @@ body {
 .well{
     background-color: rgba(115, 115, 255, 0.4);
 }
+
+/**Listings **/
+.category{
+    background-color: rgba(178, 115, 51, 0.4);
+    margin-top: 20%;
+}
 /**Listings **/
 #listing {
     background-color: brown;
 }
+
+
 
 /**Footer **/
 footer {
