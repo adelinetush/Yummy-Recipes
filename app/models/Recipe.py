@@ -2,11 +2,13 @@ class Recipe:
     def __init__(self, name, description, ingredients):
         self.name = name
         self.description = description
-        self.ingredients = []
-        self.ingredients.append(ingredients)
+        self.ingredients = ingredients
 
     def set_name(self, name):
         self.name = name
+
+    def get_ingredients(self):
+        return self.ingredients
 
     def set_description(self, description):
         self.description = description
