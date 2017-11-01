@@ -8,8 +8,6 @@ Coveralls Badge
 Code Climate Maintainability Badge
 [![Maintainability](https://api.codeclimate.com/v1/badges/833e1712ca3af333c110/maintainability)](https://codeclimate.com/github/adelinetush/Yummy-Recipes/maintainability)
 
-Code Climate Test Coverage Badge
-[![Test Coverage](https://api.codeclimate.com/v1/badges/833e1712ca3af333c110/test_coverage)](https://codeclimate.com/github/adelinetush/Yummy-Recipes/test_coverage)
 
 # Yummy-Recipes
 Yummy Recipes project for Andela
