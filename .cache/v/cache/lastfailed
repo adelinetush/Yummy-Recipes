@@ -1,0 +1,4 @@
+{
+  "app/tests/test_sample.py::test_answer": true,
+  "test_sample.py::test_answer": true
+}
