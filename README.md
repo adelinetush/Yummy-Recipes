@@ -5,6 +5,10 @@ Travis CI
 
 # Yummy-Recipes
 
+# Yummy Recipes
+
+This application was built as part of the andela challenge. 
+
 ##### Project Url:
 https://yummy-recipes-adeline.herokuapp.com/
 
@@ -22,23 +26,23 @@ Technologies:
 
 Install the dependencies for the application
 
-pip install -r requirements.txt
+ ```pip install -r requirements.txt```
  
 ### Database Migrations:
 
 Intitiliaze the migrations folder in the root of the application
 
-python manage.py db init
+```python manage.py db init```
 
 _This process is carried out once on install_
 
 Add the migrated tables to the migration:
 
-python manage.py db migrate
+```python manage.py db migrate```
 
 Update the database 
 
-python manage.py db upgrade
+```python manage.py db upgrade```
 
 #### FLASK API Documentation
 
@@ -52,8 +56,7 @@ python manage.py db upgrade
 
 *Variables:* email (string), password(string), username(string)
 
-*Response:*
-Boolean(True,False)
+*Response:* ```Boolean(True,False)```
 
 * Register
 
@@ -66,11 +69,13 @@ Boolean(True,False)
 *Variables:* email (string), password(string)
 
 *Response:* 
+```
 {
     "email": "adelinetush@gmail.com",
     "name": "andelatest",
     "password": "$6$rounds=656000$uQqrvkphjUUNYiDl$XM4Tl31pKdipuzZStV.dBYE8FkBVgoJRKNc4NV1Zc3ekKAJnQaLKgPnbvWL68OBEPsatZ/BViSKhdj4JY4/Im/"
 }
+```
 
  * Search
 
@@ -83,6 +88,7 @@ Boolean(True,False)
 *Variables:* name (string)
 
 *Response:* 
+```
 [
     {
         "description": "The best damn dish in the world",
@@ -91,6 +97,7 @@ Boolean(True,False)
         "name": "Tuna Casserole"
     }
 ]
+```
 
 * Add Recipe
 
@@ -102,21 +109,24 @@ Boolean(True,False)
 
 *Variables:* 
 
+```
 {
-  "category":1,
-  "name":"Tuna Casserole",
-  "email":"adelinetush@gmail.com",
-  "description":"The best damn dish in the world",
-  "ingredients":[
-    "1 pound of Tuna",
-    "A bag of Flour"
-  ]
+	"category":1,
+	"name":"Tuna Casserole",
+	"email":"adelinetush@gmail.com",
+	"description":"The best damn dish in the world",
+	"ingredients":[
+		"1 pound of Tuna",
+		"A bag of Flour"
+	]
 }
+```
 
 *Response:* 
 
+```
 [
-  {
+	{
         "description": "The best damn dish in the world",
         "email": "adelinetush@gmail.com",
         "id": 1,
@@ -124,6 +134,7 @@ Boolean(True,False)
         "name": "Tuna Casserole"
     }
 ]
+```
  * Get User Recipes
 
 *Authenticated:* true
@@ -136,6 +147,7 @@ Boolean(True,False)
 
 *Response:* 
 
+```
 [
     {
         "description": "The best damn dish in the world",
@@ -145,6 +157,7 @@ Boolean(True,False)
         "name": "Tuna Casserole"
     }
 ]
+```
 
  * Add Category
 
@@ -156,14 +169,17 @@ Boolean(True,False)
 
 *Variables:* 
 
+```
 {
-  "email":"adelinetush@gmail.com",
-  "name":"Casseroles",
-  "description":"A subset of awesome foods"
+	"email":"adelinetush@gmail.com",
+	"name":"Casseroles",
+	"description":"A subset of awesome foods"
 }
+```
 
 *Response:* 
 
+```
 [
     {
         "description": "A subset of awesome foods",
@@ -172,6 +188,7 @@ Boolean(True,False)
         "name": "Casseroles"
     }
 ]
+```
 * Get User Categories
 
 *Authenticated:* true
@@ -184,6 +201,7 @@ Boolean(True,False)
 
 *Response:* 
 
+```
 [
     {
         "description": "A subset of awesome foods",
@@ -192,6 +210,7 @@ Boolean(True,False)
         "name": "Casseroles"
     }
 ]
+```
 
 * Get All Categories
 
@@ -205,6 +224,7 @@ Boolean(True,False)
 
 *Response:* 
 
+```
 [
     {
         "description": "A subset of awesome foods",
@@ -219,6 +239,7 @@ Boolean(True,False)
         "name": "Pies"
     },
 ]
+```
 
 * Get Authentication Token
 
@@ -232,12 +253,18 @@ Boolean(True,False)
 
 *Response:* 
 
+```
 {
     "duration": 600,
     "token": "eyJhbGciOiJIUzI1NiIsImlhdCI6MTUwOTY5NzY0MywiZXhwIjoxNTA5Njk4MjQzfQ.eyJpZCI6NH0.M3UUFpD1AhNrehgK_Hs4B7vIZFapgC13jIW6AybpNAw"
 }
 
+```
 
 ### Sample Headed API Calls
 
+```
 http://eyJhbGciOiJIUzI1NiIsImlhdCI6MTUwOTY5NzY0MywiZXhwIjoxNTA5Njk4MjQzfQ.eyJpZCI6NH0.M3UUFpD1AhNrehgK_Hs4B7vIZFapgC13jIW6AybpNAw@127.0.0.1:5000/api/resource
+```
+
+
