@@ -34,15 +34,17 @@
           <h1>YUMMY RECIPES</h1>
           <div class="form-group">
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email">
+            <input type="email" class="form-control" id="email" name="email">
           </div>
           <div class="form-group">
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd">
+            <input type="password" class="form-control" id="pwd" name="password">
           </div>
-          <button type="submit" class="btn btn-default">Login</button>
+          <button type="submit" class="btn btn-default" onclick="Login()">Login</button>
           <p>Don't have an account?</p>
-          <button type="submit" class="btn btn-default" style="margin-bottom: 20%;">Sign Up</button>
+          <button type="submit" class="btn btn-default" style="margin-bottom: 20%;">
+            <a href="/signup">Sign Up</a>
+          </button>
         </div>
       </div>
       <!--row -->
@@ -51,11 +53,42 @@
 
   </section>
 
-  <script></script>
+
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <!--<script src="js/main.js"></script>-->
+
+  <script>
+    function Login() {
+      var username = $("input[name=email]").val();
+      var password = $("input[name=password]").val();
+
+      if (username != "" && password != "") {
+        $.ajax({
+          type: "GET",
+          url: '/auth/login?email=' + username + '&password=' + password,
+          contentType: false,
+          processData: false,
+          success: function (result) {
+            console.log(result);
+            window.location.href = '/categories'
+          },
+          error: function (xhr, status, p3, p4) {
+            console.log(xhr);
+            var err = "Error " + " " + status + " " + p3 + " " + p4;
+            if (xhr.responseText && xhr.responseText[0] == "{")
+              err = JSON.parse(xhr.responseText).Message;
+            console.log(err);
+            alert("you entered the wrong username or password");
+          }
+
+        });
+      } else {
+        window.alert("Please make sure all fields are filled")
+      }
+    }
+  </script>
 </body>
 
 </html>

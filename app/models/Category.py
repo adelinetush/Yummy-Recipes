@@ -1,5 +1,7 @@
 class Category:
-    def __init__(self, name, description):
+    def __init__(self, ID, username, name, description):
+        self.id  = ID
+        self.username = username;
         self.name = name
         self.description = description
 
@@ -14,5 +16,13 @@ class Category:
 
     def set_description(self, description):
         self.description = description
+
+    def serialize(self):
+            return {
+            'id':self.id,
+            'username':self.username,
+            'name':self.name,
+            'description':self.description
+    }
 
     
