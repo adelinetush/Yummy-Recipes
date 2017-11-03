@@ -49,7 +49,7 @@
 				"method": "GET",
 				"header": [],
 				"body": {},
-				"description": "http://127.0.0.1:5000/register?username=andrewo&password=andrew123&email=oloborama@gmail.com"
+				"description": ""
 			},
 			"response": []
 		},
@@ -96,7 +96,7 @@
 					}
 				],
 				"body": {},
-				"description": "http://127.0.0.1:5000/login?password=andrew123&email=oloborama@gmail.com"
+				"description": ""
 			},
 			"response": []
 		},
@@ -290,7 +290,7 @@
 					}
 				],
 				"body": {},
-				"description": "http://andrewo:$6$rounds=656000$lpWmEFyRsF5zQSyP$44SdXK4jp7ze5XKUQlBF4P3OPB.suYAGtgnQkXXISu.Mh9gJB0GAxAs6chy98oCez0EIHi2A6OUbmpDF6lCH4.@127.0.0.1:5000/api/token"
+				"description": ""
 			},
 			"response": []
 		},
