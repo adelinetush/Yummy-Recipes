@@ -5,8 +5,6 @@ Travis CI
 
 # Yummy-Recipes
 
-# Yummy Recipes
-
 This application was built as part of the andela challenge. 
 
 ##### Project Url:
