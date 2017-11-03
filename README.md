@@ -12,7 +12,7 @@ https://yummy-recipes-adeline.herokuapp.com/
 
 ##### Postman File:
 
-[Postman File](repo/blob/master/yummy andela.postman_collection.json)
+[a link](https://github.com/adelinetush/Yummy-Recipes/tree/master/postman)
 
 Technologies:
 
