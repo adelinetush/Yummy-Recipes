@@ -1,6 +1,7 @@
-'''base class for all users'''
+''
+'base class for all users'
+''
 class User:
-    '''base initizialization function'''
     def __init__(self, name, email, password):
         self.Id = range(0, 1000, 1)
         self.username = name
@@ -13,10 +14,12 @@ class User:
     def get_password(self):
         return self.password
 
+    def get_email(self):
+        return self.email
+
     def serialize(self):
         return {
-            'username':self.username,
-            'email':self.email,
-            'password':self.password
-    }
-
+            'username': self.username,
+            'email': self.email,
+            'password': self.password
+        }
