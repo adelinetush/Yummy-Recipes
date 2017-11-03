@@ -10,6 +10,10 @@ This application was built as part of the andela challenge.
 ##### Project Url:
 https://yummy-recipes-adeline.herokuapp.com/
 
+##### Postman File:
+
+[a relative link](/postman/yummy andela.postman_collection.json)
+
 Technologies:
 
 * Python (Flask web framework)
