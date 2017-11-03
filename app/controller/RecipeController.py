@@ -25,6 +25,12 @@ class RecipeController:
                 li.append(recipe.serialize())
         return li
 
+    def get_recipe_category(self, cat):
+        li = [];
+        for recipe in Recipe.query.filter(Recipe.category==cat):
+            li.append(recipe.serialize())
+        return li;
+
     def get_user_recipes(self, email):
         li = [];
         for recipe in Recipe.query.filter(Recipe.email == email):

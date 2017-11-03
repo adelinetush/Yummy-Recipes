@@ -63,6 +63,16 @@ def createcategory():
 def allrecipes():
     return render_template('allrecipes.html', title='AllRecipes')
 
+@app.route('/allcategories')
+def allcategories():
+    return render_template('allcategories.html', title='AllCategories')
+
+@app.route('/allrecipescat')
+def allrecipescat():
+    return render_template('allrecipescat.html', title='AllRecipes')
+
+
+
 
 #Saving and retrieving
 @app.route("/auth/register")
@@ -107,6 +117,13 @@ def listUserRecipes():
 def listRecipes():
     name = request.args.get("name")
     response = recipe.get_recipe(name);
+    return jsonify(response)
+
+@app.route("/qg")
+def getRecipesForCategory():
+    name = request.args.get("name")
+    ir = int(name)
+    response = recipe.get_recipe_category(ir);
     return jsonify(response)
 
 @app.route("/ar",methods=['POST'])
