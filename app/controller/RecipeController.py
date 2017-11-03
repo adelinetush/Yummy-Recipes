@@ -21,8 +21,7 @@ class RecipeController:
 
     def get_recipe(self, name):
         li = [];
-        for recipe in Recipe.query():
-            if(name in recipe.name):
+        for recipe in Recipe.query:
                 li.append(recipe.serialize())
         return li
 

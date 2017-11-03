@@ -21,16 +21,22 @@
         .well {
             background-color: rgba(115, 115, 255, 0.4);
         }
+
+        #recipediv {
+            background-color: rgba(178, 115, 51, 0.4);
+            margin-left: 2%;
+            margin-bottom: 2%;
+        }
         /**Footer **/
 
         footer {
             background: rgba(0, 0, 0, 0.9);
             color: white;
             position: absolute;
+            position: fixed;
             bottom: 0;
             width: 100%;
         }
-
     </style>
 </head>
 
@@ -88,9 +94,11 @@
         <div class="container " style="padding-left: 5%; padding-bottom: 10%; padding-top: 5%;">
             <div class="row">
                 <h1 class="well">RECIPES</h1>
-                <div class="col-md-11 recipes">
+            </div>
+            <div class="row">
+                <div class=" col-md-10 recipes">
+
                 </div>
-                
             </div>
         </div>
     </section>
@@ -120,34 +128,40 @@
                 async: false,
                 success: function (result) {
                     console.log(JSON.stringify(result));
-                    
+
                     for (var i = 0; i < result.length; i++) {
                         var div = document.getElementsByClassName("recipes")[0];
-                        var div_child =  document.createElement("div");
+                        var div_child = document.createElement("div");
                         div_child.id = "recipediv";
                         div_child.className = "col-md-3"
-                        div.style.display = "block";
                         var h1 = document.createElement("h1");
                         h1.innerHTML = result[i].name;
                         div_child.appendChild(h1);
                         var h3 = document.createElement("h3");
-                        h3.innerHTML = result[i].ingredients;
+                        h3.innerHTML = "Ingredients";
+                        div_child.appendChild(h3);
+                        h3.style.textDecoration = "underline";
+                        var p = document.createElement("p");
+                        p.innerHTML = result[i].ingredients;
+                        div_child.appendChild(p);
+                        var h3 = document.createElement("h3");
+                        h3.innerHTML = "Description";
+                        h3.style.textDecoration = "underline";
                         div_child.appendChild(h3);
                         var p = document.createElement("p");
                         p.innerHTML = result[i].description;
                         div_child.appendChild(p);
                         var button = document.createElement("button");
-                        button.className= "btn btn-default";
-                        button.innerText = "Edit";
-                        button.addEventListener('click',function(e){
-                            console.log(e)
-                        })
+                        button.className = "btn btn-default";
+                        button.innerText = "Share";
+                        var recipeid = result[i].id;
+                        button.addEventListener('click', function (e) {})
                         div_child.appendChild(button);
                         div.appendChild(div_child);
 
                     }
 
-                    
+
 
 
                     /*result.forEach(function (val, i) {
@@ -157,10 +171,6 @@
 
             });
         });
-
-        function GetRecipeId(){
-
-        }
     </script>
 </body>
 

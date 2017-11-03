@@ -53,7 +53,8 @@ class Recipe(BaseModel,db.Model):
             'id':self.id,
             'email':self.email,
             'name':self.name,
-            'description':self.description
+            'description':self.description,
+            'ingredients':self.ingredients
     }
 
 class User(BaseModel,db.Model):

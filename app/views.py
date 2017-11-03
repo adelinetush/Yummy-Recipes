@@ -59,6 +59,10 @@ def createcategory():
     user = {'username': 'Adeline','email':email} 
     return render_template('createcategory.html', title='CreateCategory', user=user)
 
+@app.route('/allrecipes')
+def allrecipes():
+    return render_template('allrecipes.html', title='AllRecipes')
+
 
 #Saving and retrieving
 @app.route("/auth/register")
