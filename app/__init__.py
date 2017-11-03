@@ -12,6 +12,13 @@ from app.models import db
 
 
 POSTGRES = {
+    'user': 'ihvgbhmozzsovk',
+    'pw': '5787a5a36454aae785e45bf65eecb700ebd5c3ad3f98e5bc38980f5ce8a3bd33',
+    'db': 'dcfqo2tdioauli',
+    'host': 'ec2-107-21-248-177.compute-1.amazonaws.com',
+    'port': '5432',
+}
+POSTGRESTEST = {
     'user': 'postgres',
     'pw': 'root',
     'db': 'yummy',

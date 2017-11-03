@@ -139,7 +139,9 @@
                         var button = document.createElement("button");
                         button.className= "btn btn-default";
                         button.innerText = "Edit";
-                        button.onclick = GetRecipeId();
+                        button.addEventListener('click',function(e){
+                            console.log(e)
+                        })
                         div_child.appendChild(button);
                         div.appendChild(div_child);
 
