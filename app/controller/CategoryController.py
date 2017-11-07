@@ -7,6 +7,7 @@ from app.models import db
 class CategoryController:
     """Manage Category Controller"""
     def __init__(self):
+        self.categories = [];
         self.count = 1
 
 
@@ -44,12 +45,15 @@ class CategoryController:
     def add_category_memory(self, cat):
         """Deprecated Store to Memory Functions"""
         c = None
-        #c = Category(self.count, cat['email'],cat['name'],cat['description'])
+        c = Category(cat['email'],cat['name'],cat['description'])
         self.count += 1
         self.categories.append(c.serialize())
         return self.categories
 
     def delete_category_memory(self,item):
         """Deprecated Store to Memory Functions"""
-        self.categories.remove(item)
-        return True
+        for i in self.categories:
+            if(i['name']==item['name']):
+                i =  None
+                return True
+        return False

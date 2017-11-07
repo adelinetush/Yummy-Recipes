@@ -48,7 +48,7 @@ class RecipeController:
         li = [];
         for recipe in self.recipes:
             if(name in recipe['name']):
-                li.append(recipe.serialize())
+                li.append(recipe)
         return li
                 
 
