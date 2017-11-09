@@ -1,4 +1,5 @@
 from app.models.model.Model import Category
+from app.models.model.Model import Recipe
 #from app.models.model import Category
 from app.models import db
 
@@ -21,7 +22,25 @@ class CategoryController:
         for cat in Category.query.filter(Category.email == cat['email']):
             self.categories.append(cat.serialize())
         return self.categories
-        
+
+    def get_category_id(self, id):
+        li = [];
+        id = int(id)
+        for category in Category.query:
+            if id == category.id:
+                li.append(category.serialize())
+        return li
+
+        '''
+    def update_category(self, cat):
+        id = cat['id']
+        for category in Category.query.filter(Category.id == id):
+            category.name = cat['name'];
+            category.description = cat['description']
+            db.session.commit()
+            return True
+        return False
+        '''
     def get_user_category(self,email):
         guc = []
         for cat in Category.query.filter(Category.email == email):
@@ -33,10 +52,23 @@ class CategoryController:
         for cat in Category.query:
             gac.append(cat.serialize())
         return gac
+
+    def update_category(self, cat):
+        id = int(cat['id'])
+        for category in Category.query.filter(Category.id == id):
+            category.name = cat['name']
+            category.description = cat['description']
+            db.session.commit();
+            return True
+        return False;
         
     def delete_category(self, id):
+        id = int(id)
         if(Category.query.filter(Category.id == id).count()>0):
             for cat in Category.query.filter(Category.id == id):
+                for recipe in Recipe.query.filter(Recipe.category == id):
+                    db.session.delete(recipe)
+                    db.session.commit()
                 db.session.delete(cat)
                 db.session.commit()
             return True

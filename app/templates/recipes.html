@@ -26,7 +26,7 @@
             background-color: rgba(178, 115, 51, 0.4);
             margin-left: 5%;
             margin-bottom: 2%;
-            min-height:300px
+            min-height: 300px
         }
         /**Footer **/
 
@@ -91,17 +91,19 @@
             </div>
         </div>
     </header>
-        <div class="container" style="padding-bottom: 5%;">
-            <div class="row">
-                <h1 class="well">RECIPES</h1>
-            </div>
-            <div class="row" style="padding-bottom: 5%;">
-                <div class=" col-md-12 recipes">
-
-                </div>
-            </div>
-            <button class="class="btn btn-default""><a href="/createrecipe">Add Recipe</a></button>
+    <div class="container" style="padding-bottom: 5%;">
+        <div class="row">
+            <h1 class="well">RECIPES</h1>
         </div>
+        <div class="row" style="padding-bottom: 5%;">
+            <div class=" col-md-12 recipes">
+
+            </div>
+        </div>
+        <button class="class=" btn btn-default "">
+            <a href="/createrecipe">Add Recipe</a>
+        </button>
+    </div>
     <footer>
         <p class="text-center text-uppercase" style="padding-top: 0.5%;">YUMMY RECIPES ANDELA</p>
         <p class="text-center">Created by Adeline</p>
@@ -111,15 +113,27 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<script src="js/main.js"></script>-->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1626279997680641';
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+    <!--<div id="fb-root"></div>
     <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1626279997680641';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>-->
+    <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
         var recipeid;
         $(document).ready(function (e) {
             /**http: //127.0.0.1:5000/qu?username=adelinetush@gmail.com**/
@@ -160,10 +174,50 @@
                         div_child.appendChild(p);
                         var button = document.createElement("button");
                         button.className = "btn btn-default";
-                        button.innerText = "Share";
+                        button.innerText = "Edit";
                         var recipeid = result[i].id;
-                        button.addEventListener('click', function (e) {})
-                        //div_child.appendChild(button);
+                        button.name = result[i].name;
+                        button.addEventListener('click', function (e) {
+                            console.log(e.target.name)
+                            //window.location = '/qr?name=' + e.target.name
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: '/qr?name=' + e.target.name,
+                                data: {},
+                                contentType: "application/json; charset=utf-8",
+                                success: function (result) {
+
+                                    //alert(JSON.stringify(result[0]));
+                                    console.log(result[0].id);
+                                    window.location.href = '/editrecipe?id='+result[0].id;
+                                },
+                            });
+
+                        })
+                        var delete_btn = document.createElement("button");
+                        delete_btn.className = "btn btn-default";
+                        delete_btn.innerText = "Delete";
+                        var recipeid = result[i].id;
+                        delete_btn.id = recipeid
+                        delete_btn.addEventListener('click',function(e){
+                            console.log(e.target.id)
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: '/dr?id=' + e.target.id,
+                                data: {},
+                                contentType: "application/json; charset=utf-8",
+                                success: function (result) {
+
+                                    alert(JSON.stringify(result));
+                                    window.location.href = '/recipes'
+                                },
+                            });
+                        })
+
+                        div_child.appendChild(button);
+                        div_child.appendChild(delete_btn)
                         div.appendChild(div_child);
 
                     }

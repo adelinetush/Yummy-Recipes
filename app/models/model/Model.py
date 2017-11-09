@@ -23,6 +23,7 @@ class Category(BaseModel, db.Model):
         self.name = name
         self.description = description
 
+
     def serialize(self):
             return {
             'id':self.id,
@@ -42,7 +43,7 @@ class Recipe(BaseModel,db.Model):
     ingredients = db.Column(db.Text())
 
     def __init__(self, category, name, email, description, ingredients):
-        self.category = category;
+        self.category = category
         self.name = name
         self.email = email
         self.description = description
@@ -72,6 +73,9 @@ class User(BaseModel,db.Model):
         self.password_hash  = self.hash_password(password)
         self.password = self.hash_password(password)
 
+    def __str__(self):
+            return "User(id='%s')" % self.id
+
     def hash_password(self, password):
         self.password_hash = pwd_context.encrypt(password)
         return self.password_hash
@@ -85,6 +89,7 @@ class User(BaseModel,db.Model):
 
     def serialize(self):
             return {
+            'id':self.Id,
             'name':self.name,
             'email':self.email,
             'password':self.password

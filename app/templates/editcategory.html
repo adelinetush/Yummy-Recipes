@@ -31,6 +31,7 @@
 
 <body>
     <header font-family:PT Sans , sans-serif;>
+        <input id="useremail" hidden value={{user.email}}>
         <div class="container">
             <!-- Topper w/ logo -->
             <div class="row hidden-xs topper">
@@ -81,28 +82,17 @@
     <section id="create" class="create">
         <div class="container" style="padding-left: 5%; padding-bottom: 10%; padding-top: 2%;">
             <div class="row">
-                <h1 class="well">CREATE NEW RECIPE</h1>
+                <h1 class="well">CREATE NEW CATEGORY</h1>
                 <div class="col-md-6" style="margin-left: 0%;">
-                    <div class="dropdown">
-                        <label for="recipe">Select Recipe Category:</label>
-                        <select id="categorydropdown">
-                            <option value="0">Select Category </option>
-                        </select>
+                    <div class="form-group">
+                        <label for="recipe">Category Name:</label>
+                        <input type="text" class="form-control" id="categoryname" name="categoryname">
                     </div>
                     <div class="form-group">
-                        <label for="recipe">Recipe Name:</label>
-                        <input type="text" class="form-control" id="recipename" name="recipename">
+                        <label for="ingredients">Description</label>
+                        <input type="text" class="form-control" id="categorydescription" name="categorydescription">
                     </div>
-                    <div class="form-group">
-                        <label for="ingredients">Ingredients:</label>
-                        <input type="text" class="form-control" id="ingredients" name="ingredients">
-                    </div>
-                    <input id="useremail" hidden value={{user.email}}>
-                    <div class="form-group">
-                        <label for="directions">Directions:</label>
-                        <input type="text" class="form-control" id="directions" name="directions">
-                    </div>
-                    <button type="submit" class="btn btn-default" onclick="SaveRecipe()">Save</button>
+                    <button type="submit" class="btn btn-default" onclick="UpdateCategory()">Save</button>
                 </div>
 
             </div>
@@ -116,51 +106,26 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!--<script src="js/main.js"></script>-->
+
     <script>
-        var catgories = document.getElementById("categorydropdown");
-        var category = catgories.options[catgories.selectedIndex].value;
-
-        $("#categorydropdown").change(function () {
-            category = $("#categorydropdown").val();
-        });
-
-        function SaveRecipe() {
-            var recipename = $("input[name=recipename]").val();
-            var ingredients = $("input[name=ingredients]").val();
-            var directions = $("input[name=directions]").val();
-            var email = document.getElementById("useremail").value;
-
-            if (recipename != "" && ingredients != "" && directions != "") {
-                data = {
-                    "category": category,
-                    "name": recipename,
-                    "email": email,
-                    "description": directions,
-                    "ingredients": ingredients
-                }
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: '/ar',
-                    data: JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    success: function (result) {
-                        console.log(result);
-                        window.location.href = '/recipes';
-                    },
-                });
-            }
-
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
         }
-
-
-        $(document).ready(function () {
+        $(document).ready(function (e) {
             var email = document.getElementById("useremail").value;
+            var id = getParameterByName('id')
+            /**http://127.0.0.1:5000/gac**/
 
             //To get the recipes
             $.ajax({
                 type: "GET",
-                url: '/guc?email=' + email,
+                url: '/qci?id=' + id,
                 contentType: false,
                 dataType: 'json',
                 data: {},
@@ -168,20 +133,41 @@
                 success: function (result) {
                     console.log(JSON.stringify(result));
 
-                    result.forEach(function (val, i) {
-                        console.log(val.id, val.name);
-                        $('#categorydropdown').append($('<option>', { 
-                            value: val.id,                          
-                            text: val.name
-                            
-                        }));
-                    //$('#recipeslist').append($('<li>').text(val.name + val.description));
-                    })
+                    $("input[name=categoryname]").val(result[0].name);
+                    $("input[name=categorydescription]").val(result[0].description);
+
+                    /*result.forEach(function (val, i) {
+                    $('#recipeslist').append($('<li>').text(val.name + val.description));
+                    })*/
                 }
 
             });
-
         });
+        function UpdateCategory() {
+            var categoryname = $("input[name=categoryname]").val();
+            var categorydescription = $("input[name=categorydescription]").val();
+            var email = document.getElementById("useremail").value;
+
+            if (categoryname != "" && categorydescription != "") {
+                data = {
+                    'id':getParameterByName('id'),
+                    "name": categoryname,
+                    "description": categorydescription,
+                    "email": email
+                }
+                $.ajax({
+                    type: "POST",
+                    dataType: "json",
+                    url: '/uc',
+                    data: JSON.stringify(data),
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+                        console.log(result);
+                        window.location.href = '/categories';
+                    },
+                });
+            }
+        }
     </script>
 </body>
 

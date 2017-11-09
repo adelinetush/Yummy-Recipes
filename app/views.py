@@ -7,13 +7,26 @@ from app import app
 from app.controller.UserController import UserController
 from app.controller.RecipeController import RecipeController
 from app.controller.CategoryController import CategoryController
+from flask_jwt import JWT, jwt_required, current_identity
+
+import jwt
 
 user = UserController()
 recipe = RecipeController()
 category = CategoryController();
 auth = HTTPBasicAuth()
+
+#app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
+
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
- 
+  
+jwt = JWT(app, user.authenticate, user.identity)
+
+
+
+@app.route('/protected')
+def protected():
+    return '%s' % current_identity
 
 @auth.verify_password
 def verify_password(username_or_token, password):
@@ -71,6 +84,17 @@ def allcategories():
 def allrecipescat():
     return render_template('allrecipescat.html', title='AllRecipes')
 
+@app.route('/editrecipe')
+def editrecipe():
+    user = {'username': 'Adeline','email':email} 
+    return render_template('editrecipe.html', title='EditRecipe',  user=user)
+
+
+@app.route('/editcategory')
+def editcategory():
+    user = {'username': 'Adeline','email':email} 
+    return render_template('editcategory.html', title='EditCategory',  user=user)
+
 
 
 
@@ -108,16 +132,38 @@ def get_auth_token():
 
 #Recipe Functions
 @app.route("/qu")
+@jwt_required()
 def listUserRecipes():
     username = request.args.get("username")
     response = recipe.get_user_recipes(username)
     return jsonify(response)
+
 
 @app.route("/q")
 def listRecipes():
     name = request.args.get("name")
     response = recipe.get_recipe(name);
     return jsonify(response)
+
+@app.route("/qr")
+def searchRecipeByName():
+    name = request.args.get("name")
+    response = recipe.get_recipe_name(name);
+    return jsonify(response)
+
+@app.route("/qri")
+def searchRecipeById():
+    id = request.args.get("id")
+    response = recipe.get_recipe_id(id);
+    return jsonify(response)
+
+@app.route("/qci",methods=['GET'])
+def searchCategoryById():
+    id = request.args.get("id")
+    response = category.get_category_id(id);
+    return jsonify(response)
+
+
 
 @app.route("/qg")
 def getRecipesForCategory():
@@ -131,6 +177,24 @@ def addRecipes():
     r = request.get_json()
     response = recipe.add_recipe(r)
     return jsonify(response)
+
+@app.route("/ur",methods=['POST'])
+def updateRecipe():
+    r = request.get_json()
+    response = recipe.update_recipe(r)
+    return jsonify(response)
+
+@app.route("/uc",methods=['POST'])
+def updateCategory():
+    r = request.get_json()
+    response = category.update_category(r)
+    return jsonify(response)
+
+@app.route("/dr")
+def delete_recipe():
+    id = request.args.get('id')
+    res = recipe.delete_recipe(id)
+    return jsonify(res)
 
 #Category Functions
 @app.route("/ac",methods=['POST'])
@@ -156,4 +220,10 @@ def delete_category():
     id = request.args.get('id')
     ir = int(id)
     res = category.delete_category(ir)
+    return jsonify(res)
+
+@app.route("/uc")
+def update_category():
+    cat = request.get_json()
+    res = category.update_category(cat)
     return jsonify(res)

@@ -22,11 +22,11 @@
             background-color: rgba(115, 115, 255, 0.4);
         }
 
-        #categorydiv{
+        #categorydiv {
             background-color: rgba(108, 108, 156, 0.4);
             margin-left: 5%;
             margin-bottom: 2%;
-            min-height:300px
+            min-height: 300px
         }
         /**Footer **/
 
@@ -100,7 +100,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="margin-left: 0%; margin-top: 5%;">
-                        <button class="btn btn-default"><a href="/createcategory">Add New Category</a></button>
+                        <button class="btn btn-default">
+                            <a href="/createcategory">Add New Category</a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -147,11 +149,49 @@
                         button.innerText = "See Recipes";
                         var recipeid = result[i].id;
                         button.id = recipeid;
+
                         button.addEventListener('click', function (e) {
                             console.log(e.target.id)
-                            window.location = "/allrecipescat?name="+e.target.id
+                            window.location = "/allrecipescat?name=" + e.target.id
                         })
                         div_child.appendChild(button);
+
+                        var button = document.createElement("button");
+                        button.className = "btn btn-default";
+                        button.innerText = "Edit Category";
+                        var recipeid = result[i].id;
+                        button.id = recipeid;
+
+                        button.addEventListener('click', function (e) {
+                            console.log(e.target.id)
+                            //window.location = '/qr?name=' + e.target.name
+                            window.location.href = '/editcategory?id=' + e.target.id;
+
+                           
+                        })
+                        var delete_btn = document.createElement("button");
+                        delete_btn.className = "btn btn-default";
+                        delete_btn.innerText = "Delete";
+                        var recipeid = result[i].id;
+                        delete_btn.id = recipeid
+                        delete_btn.addEventListener('click',function(e){
+                            console.log(e.target.id)
+                            $.ajax({
+                                type: "GET",
+                                dataType: "json",
+                                url: '/dc?id=' + e.target.id,
+                                data: {},
+                                contentType: "application/json; charset=utf-8",
+                                success: function (result) {
+
+                                    alert(JSON.stringify(result));
+                                    window.location.href = '/categories'
+                                },
+                            });
+                        })
+
+                        div_child.appendChild(button);
+                        div_child.appendChild(delete_btn)
                         div.appendChild(div_child);
 
                     }

@@ -1,10 +1,18 @@
 #from app.models.User import User
 from app.models.model.Model import User
 from app.models import db
+from flask_jwt import JWT, jwt_required, current_identity
+from werkzeug.security import safe_str_cmp
+
+USER_DATA = {
+        "masnun": "abc123"
+}
 
 class UserController:
     global users
 
+
+    
     def __init__(self):
         print('ini self')
         self.users = []
@@ -22,6 +30,17 @@ class UserController:
             if(user.email == email and user.password== password):
                 return True;
         return False;
+
+
+    def authenticate(self, username, password):
+        for user in User.query.filter(User.email == username):
+            return user;
+        return False;
+
+    def identity(self, payload):
+        user_id = payload['identity']
+        for user in User.query.filter(User.id==user_id):
+            return user
 
     def register_memory(self, username, email, password):
         f = False;
