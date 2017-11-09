@@ -1,4 +1,7 @@
 {
   "app/tests/test_category_controller.py::test_category_controller::test_add_category": true,
+  "app/tests/test_recipe_controller.py::test_category_controller::test_add_recipe": true,
+  "app/tests/test_recipe_controller.py::test_category_controller::test_get_recipe": true,
+  "app/tests/test_user_controller.py::test_user_controller::test_login_memory": true,
   "test_sample.py::test_answer": true
 }

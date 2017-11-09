@@ -14,6 +14,10 @@ class test_user(unittest.TestCase):
     def test_get_email(self):
         u = User("adeline","adelinetush@gmail.com","youwish")
         self.assertEqual("adelinetush@gmail.com", u.get_email())
+    
+    def test_serialize(self):
+        u = User("adeline","adelinetush@gmail.com","youwish")
+        self.assertIsInstance(u.serialize(),object)
 
 if(__name__=='__main__'):
     unittest.main()

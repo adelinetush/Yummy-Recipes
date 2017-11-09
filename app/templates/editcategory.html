@@ -54,26 +54,25 @@
                             </button>
                         </div>
                         <!--navbar-header-->
-
                         <div class="navbar-collapse collapse">
-                            <ul class="nav nav-justified">
-                                <li>
-                                    <a href="/index"> HOME </a>
-                                </li>
-                                <li>
-                                    <a href="/categories"> CATEGORIES </a>
-                                </li>
-                                <li>
-                                    <a href="/recipes"> RECIPES </a>
-                                </li>
-                                <li>
-                                    <a href="/createrecipe"> ADD NEW </a>
-                                </li>
-                                <li>
-                                    <a href="#"> LOGOUT </a>
-                                </li>
-                            </ul>
-                        </div>
+                                <ul class="nav nav-justified">
+                                    <li>
+                                        <a href="/index"> HOME </a>
+                                    </li>
+                                    <li>
+                                        <a href="/categories?email={{user.email}}"> CATEGORIES </a>
+                                    </li>
+                                    <li>
+                                        <a href="/recipes?email={{user.email}}"> RECIPES </a>
+                                    </li>
+                                    <li>
+                                        <a href="/createrecipe?email={{user.email}}"> ADD NEW </a>
+                                    </li>
+                                    <li>
+                                        <a href="/index"> LOGOUT </a>
+                                    </li>
+                                </ul>
+                            </div>
                     </nav>
                 </div>
             </div>
@@ -163,7 +162,7 @@
                     contentType: "application/json; charset=utf-8",
                     success: function (result) {
                         console.log(result);
-                        window.location.href = '/categories';
+                        window.location.href = '/categories?email='+email;
                     },
                 });
             }

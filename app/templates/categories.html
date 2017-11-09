@@ -73,16 +73,16 @@
                                     <a href="/index"> HOME </a>
                                 </li>
                                 <li>
-                                    <a href="/categories"> CATEGORIES </a>
+                                    <a href="/categories?email={{user.email}}"> CATEGORIES </a>
                                 </li>
                                 <li>
-                                    <a href="/recipes"> RECIPES </a>
+                                    <a href="/recipes?email={{user.email}}"> RECIPES </a>
                                 </li>
                                 <li>
-                                    <a href="/createrecipe"> ADD NEW </a>
+                                    <a href="/createrecipe?email={{user.email}}"> ADD NEW </a>
                                 </li>
                                 <li>
-                                    <a href="#"> LOGOUT </a>
+                                    <a href="/index"> LOGOUT </a>
                                 </li>
                             </ul>
                         </div>
@@ -101,7 +101,7 @@
                 <div class="row">
                     <div class="col-md-4" style="margin-left: 0%; margin-top: 5%;">
                         <button class="btn btn-default">
-                            <a href="/createcategory">Add New Category</a>
+                            <a href="/createcategory?email={{user.email}}">Add New Category</a>
                         </button>
                     </div>
                 </div>
@@ -117,9 +117,18 @@
     <!--<script src="js/main.js"></script>-->
 
     <script>
+        function getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, "\\$&");
+            var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, " "));
+        }
         $(document).ready(function (e) {
             /**http://127.0.0.1:5000/guc?email=adelinetush@gmail.com**/
-            var useremail = document.getElementById("useremail").value;
+            var useremail = getParameterByName('email')
 
             //To get the categories
             $.ajax({
@@ -152,7 +161,7 @@
 
                         button.addEventListener('click', function (e) {
                             console.log(e.target.id)
-                            window.location = "/allrecipescat?name=" + e.target.id
+                            window.location = "/allrecipescat?name=" + e.target.id+'&email='+useremail;
                         })
                         div_child.appendChild(button);
 
@@ -165,7 +174,7 @@
                         button.addEventListener('click', function (e) {
                             console.log(e.target.id)
                             //window.location = '/qr?name=' + e.target.name
-                            window.location.href = '/editcategory?id=' + e.target.id;
+                            window.location.href = '/editcategory?id=' + e.target.id+'&email='+useremail;
 
                            
                         })
@@ -184,8 +193,9 @@
                                 contentType: "application/json; charset=utf-8",
                                 success: function (result) {
 
-                                    alert(JSON.stringify(result));
-                                    window.location.href = '/categories'
+                                    // alert(JSON.stringify(result));
+                                    alert("WARNING! All recipes in this category will be leleted.")
+                                    window.location.href = '/categories?email=' + useremail
                                 },
                             });
                         })

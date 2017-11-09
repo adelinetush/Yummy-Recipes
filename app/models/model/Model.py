@@ -88,8 +88,9 @@ class User(BaseModel,db.Model):
         return s.dumps({'id': self.id})
 
     def serialize(self):
+            
             return {
-            'id':self.Id,
+            'id':self.id,
             'name':self.name,
             'email':self.email,
             'password':self.password

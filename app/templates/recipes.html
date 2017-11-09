@@ -66,26 +66,25 @@
                             </button>
                         </div>
                         <!--navbar-header-->
-
                         <div class="navbar-collapse collapse">
-                            <ul class="nav nav-justified">
-                                <li>
-                                    <a href="/index"> HOME </a>
-                                </li>
-                                <li>
-                                    <a href="/categories"> CATEGORIES </a>
-                                </li>
-                                <li>
-                                    <a href="/recipes"> RECIPES </a>
-                                </li>
-                                <li>
-                                    <a href="/createrecipe"> ADD NEW </a>
-                                </li>
-                                <li>
-                                    <a href="/index"> LOGOUT </a>
-                                </li>
-                            </ul>
-                        </div>
+                                <ul class="nav nav-justified">
+                                    <li>
+                                        <a href="/index"> HOME </a>
+                                    </li>
+                                    <li>
+                                        <a href="/categories?email={{user.email}}"> CATEGORIES </a>
+                                    </li>
+                                    <li>
+                                        <a href="/recipes?email={{user.email}}"> RECIPES </a>
+                                    </li>
+                                    <li>
+                                        <a href="/createrecipe?email={{user.email}}"> ADD NEW </a>
+                                    </li>
+                                    <li>
+                                        <a href="/index"> LOGOUT </a>
+                                    </li>
+                                </ul>
+                            </div>
                     </nav>
                 </div>
             </div>
@@ -101,7 +100,7 @@
             </div>
         </div>
         <button class="class=" btn btn-default "">
-            <a href="/createrecipe">Add Recipe</a>
+            <a href="/createrecipe?email={{user.email}}">Add Recipe</a>
         </button>
     </div>
     <footer>
@@ -190,7 +189,7 @@
 
                                     //alert(JSON.stringify(result[0]));
                                     console.log(result[0].id);
-                                    window.location.href = '/editrecipe?id='+result[0].id;
+                                    window.location.href = '/editrecipe?id='+result[0].id+'&email='+useremail;
                                 },
                             });
 
@@ -211,7 +210,7 @@
                                 success: function (result) {
 
                                     alert(JSON.stringify(result));
-                                    window.location.href = '/recipes'
+                                    window.location.href = '/recipes?email='+useremail
                                 },
                             });
                         })

@@ -9,14 +9,14 @@ from app.controller.RecipeController import RecipeController
 from app.controller.CategoryController import CategoryController
 from flask_jwt import JWT, jwt_required, current_identity
 
+
+
 import jwt
 
 user = UserController()
 recipe = RecipeController()
 category = CategoryController();
 auth = HTTPBasicAuth()
-
-#app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
 
 app.config['SECRET_KEY'] = 'the quick brown fox jumps over the lazy dog'
   
@@ -44,7 +44,7 @@ email = "adelinetush@gmail.com"
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'username': 'Adeline','email':email} 
+    user = {'email':email} 
     return render_template('index.html', title='Home', user=user)
 
 @app.route('/')
@@ -54,22 +54,26 @@ def signup():
 
 @app.route('/categories')
 def categories():
-    user = {'username': 'Adeline','email':email} 
+    email = request.args.get('email')
+    user = {'email':email} 
     return render_template('categories.html', title='Categories', user=user)
 
 @app.route('/recipes')
 def recipes():
+    email = request.args.get('email')
     user = {'username':'Adeline', 'email': email}
     return render_template('recipes.html', title='Recipes', user=user)
 
 @app.route('/createrecipe')
 def createrecipe():
-    user = {'username': 'Adeline','email':email} 
+    email = request.args.get('email')
+    user = {'email':email} 
     return render_template('createrecipe.html', title='CreateRecipe',user=user)
 
 @app.route('/createcategory')
 def createcategory():
-    user = {'username': 'Adeline','email':email} 
+    email = request.args.get('email')
+    user = {'email':email} 
     return render_template('createcategory.html', title='CreateCategory', user=user)
 
 @app.route('/allrecipes')
@@ -86,13 +90,15 @@ def allrecipescat():
 
 @app.route('/editrecipe')
 def editrecipe():
-    user = {'username': 'Adeline','email':email} 
+    email = request.args.get('email')
+    user = {'email':email} 
     return render_template('editrecipe.html', title='EditRecipe',  user=user)
 
 
 @app.route('/editcategory')
 def editcategory():
-    user = {'username': 'Adeline','email':email} 
+    email = request.args.get('email')
+    user = {'email':email} 
     return render_template('editcategory.html', title='EditCategory',  user=user)
 
 

@@ -80,7 +80,7 @@
           processData: false,
           success: function (result) {
             console.log(result);
-            window.location.href = '/categories'
+            window.location.href = '/categories?email='+username
           },
           error: function (xhr, status, p3, p4) {
             console.log(xhr);

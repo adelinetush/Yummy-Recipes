@@ -46,15 +46,16 @@ class UserController:
         f = False;
         if(len(self.users)==0):
             user = User(username, email, password)
-            self.users.append(user.serialize())
+            self.users.append(user)
             return self.users
 
         for user in self.users:
+            print(user)
             if(user['username']== username and user['password']==password):
                     f = True;
         if(f!=True):
             user = User(username, email, password)
-            self.users.append(user.serialize())
+            self.users.append(user)
         return self.users
 
     def login_memory(self, email, password):

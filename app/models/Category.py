@@ -13,9 +13,11 @@ class Category:
 
     def set_name(self, name):
         self.name = name
+        return name
 
     def set_description(self, description):
         self.description = description
+        return self.description
 
     def serialize(self):
             return {

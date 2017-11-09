@@ -9,7 +9,7 @@ def static_file(path):
 from app.models import db
 
 
-
+ 
 
 POSTGRES = {
     'user': 'ihvgbhmozzsovk',
@@ -27,7 +27,7 @@ POSTGRESTEST = {
 }
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:root@localhost:5432/yummy'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://%(user)s:\
-%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRESTEST
+%(pw)s@%(host)s:%(port)s/%(db)s' % POSTGRES
 
 db.init_app(app)
 
