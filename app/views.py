@@ -132,7 +132,6 @@ def get_auth_token():
 
 #Recipe Functions
 @app.route("/qu")
-@jwt_required()
 def listUserRecipes():
     username = request.args.get("username")
     response = recipe.get_user_recipes(username)
