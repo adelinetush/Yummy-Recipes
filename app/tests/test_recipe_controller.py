@@ -51,23 +51,5 @@ class test_category_controller(unittest.TestCase):
         response = recipe.get_user_recipes_memory('adelinetush@gmail.com')
         self.assertEqual(len(response)-2, t)
 
-    def test_add_recipe(self):
-        r = dict()
-        r['category'] = 1
-        r['name'] = 'test'
-        r['email'] = 'adelinetush@gmail.com'
-        r['description'] = 'test description'
-        r['ingredients'] = []
-        response = recipe.add_recipe(r)
-        self.assertIsInstance(response,object)
-    
-    def test_get_recipe(self):
-        r = dict()
-        r['category'] = 1
-        r['name'] = 'test'
-        r['email'] = 'adelinetush@gmail.com'
-        r['description'] = 'test description'
-        r['ingredients'] = []
-        response = recipe.get_recipe('test')
-        self.assertEqual(len(response),1)
+
     
